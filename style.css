@@ -4,59 +4,76 @@
   box-sizing: border-box;
 }
 
-/* :root {
---live-indicator-shadow: #eb565680;
---rich-black-fogra-30:   #111722;
---rich-black-fogra-29:   #131720;
---live-indicator:        #eb5656;
---oxford-blue-50:        #162032cc;
---oxford-blue:           #162032;
---light-azure:           #3182ed;
---off-white:             #e0e0e0;
---yellow:                #ffc414;
---white:                 #ffffff;
---azure:  
-} */
+:root {
+  --navy-blue: #111722;
+  --navy-blue-dark: #131720;
+  --oxford-blue-light: #162032cc;
+  --oxford-blue: #162032;
+  --blue: #3182ed;
+  --off-white: #e0e0e0;
+  --yellow: #ffc414;
+  --white: #ffffff;
+}
+
+.primary-color {
+    color: var(--blue);
+}
 
 body {
-  background: #22254b;
+    width: 100%;
+    max-width: 1300px;
+    margin: auto;
+  background: var(--navy-blue-dark);
   font-family: "Poppins", sans-serif;
 }
 
 header {
-    background: #373b69;
-    padding : 1.5rem;
-    display: flex;
-    justify-content: flex-end;
+    margin: auto;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.logo {
+    cursor: pointer;
+  color: #fff;
 }
 
- .search{
-    outline: noe;
-
-    background: transparent;
-    border-radius: 30px;
-    padding: .5rem 1rem;
-    color: #7378c5;
-
-    font-size: 1rem;
-    border: 1px solid #22254b;
+.search {
+  outline: none;
+  background: var(--oxford-blue);
+  border-radius: 30px;
+  padding: 12px 20px;
+  color: var(--white);
+  font-size: 1rem;
+  border: none;
 }
 
- .search::placeholder {
-color: #7378c5;
+.search::placeholder {
+  color: var(--off-white);
 }
 
 .search:focus {
-    background: #22254b;
-    color: #fff;
-    outline: none;
+  color: #fff;
+  outline: none;
+}
+
+.label {
+    position: relative;
+
+}
+
+.search-icon {
+    position: absolute;
+    top: -2px;
+    right: 20px;
+    color: var(--blue);
+    font-size: 20px;
 }
 
 main {
-    display: flex;
-display: grid;
-grid-template-columns: repeat(auto-fit, 320px);
-justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 320px);
+  justify-content: center;
 }
 
 .movie {
@@ -88,16 +105,14 @@ justify-content: center;
   font-weight: bold;
 }
 
-
 .movie-info span.green {
-    color: #76d152;
+  color: #76d152;
+}
 
-  }
-  
-  .movie-info span.orange {
-      color: #f2a955;
+.movie-info span.orange {
+  color: #f2a955;
 }
 
 .movie-info span.red {
-    color: #E93F3F;
+  color: #e93f3f;
 }
