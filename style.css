@@ -23,6 +23,35 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+header {
+    background: #373b69;
+    padding : 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+ .search{
+    outline: noe;
+
+    background: transparent;
+    border-radius: 30px;
+    padding: .5rem 1rem;
+    color: #7378c5;
+
+    font-size: 1rem;
+    border: 1px solid #22254b;
+}
+
+ .search::placeholder {
+color: #7378c5;
+}
+
+.search:focus {
+    background: #22254b;
+    color: #fff;
+    outline: none;
+}
+
 main {
     display: flex;
 display: grid;
