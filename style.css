@@ -24,7 +24,7 @@ body {
 }
 
 .movie {
-    margin: 2rem;
+  margin: 2rem;
   background: #373b69;
   color: #eee;
   border-radius: 3px;
@@ -48,6 +48,5 @@ body {
   background: #22254b;
   padding: 5px 8px;
   font-size: 0.9rem;
-
   font-weight: 600;
 }
