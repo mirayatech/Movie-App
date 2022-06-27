@@ -6,8 +6,12 @@ const APIURL =
 
 const IMGPATH = "https://image.tmdb.org/t/p/w1280";
 
-const main = document.createElement('main')
-document.body.appendChild(main)
+const form = document.querySelector('form')
+
+const main = document.querySelector('main')
+
+
+getMovies();
 
 async function getMovies() {
     const response = await fetch(APIURL);
@@ -38,7 +42,7 @@ async function getMovies() {
 
 
 function getClassByRate(vote) {
-    if(vote > 8) {
+    if (vote > 8) {
         return 'green'
     } else if (vote >= 5) {
         return 'orange'
@@ -47,4 +51,3 @@ function getClassByRate(vote) {
     }
 }
 
-getMovies();
