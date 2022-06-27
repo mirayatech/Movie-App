@@ -34,7 +34,7 @@ justify-content: center;
   margin: 1rem;
   background: #373b69;
   color: #eee;
-  border-radius: 3px;
+  border-radius: 2px;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
   width: 300px;
   letter-spacing: 1px;
@@ -55,5 +55,19 @@ justify-content: center;
   background: #22254b;
   padding: 5px 8px;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: bold;
+}
+
+
+.movie-info span.green {
+    color: #2CC56D;
+
+  }
+  
+  .movie-info span.orange {
+      color: #E98B22;
+}
+
+.movie-info span.red {
+    color: #E93F3F;
 }
