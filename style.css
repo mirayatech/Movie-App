@@ -16,36 +16,41 @@
 }
 
 .primary-color {
-    color: var(--blue);
+  color: var(--blue);
 }
 
 body {
-    width: 100%;
-    max-width: 1300px;
-    margin: auto;
+  width: 100%;
+  margin: auto;
+  max-width: 1300px;
   background: var(--navy-blue-dark);
   font-family: "Poppins", sans-serif;
 }
 
 header {
-    margin: auto;
-  padding: 1.5rem;
+  margin: auto;
   display: flex;
+  padding: 1.5rem;
   justify-content: space-between;
 }
+
 .logo {
-    cursor: pointer;
   color: #fff;
+  cursor: pointer;
+}
+
+.label {
+  position: relative;
 }
 
 .search {
+  border: none;
   outline: none;
-  background: var(--oxford-blue);
-  border-radius: 30px;
+  font-size: 1rem;
   padding: 12px 20px;
   color: var(--white);
-  font-size: 1rem;
-  border: none;
+  border-radius: 30px;
+  background: var(--oxford-blue);
 }
 
 .search::placeholder {
@@ -57,62 +62,65 @@ header {
   outline: none;
 }
 
-.label {
-    position: relative;
-
-}
-
 .search-icon {
-    position: absolute;
-    top: -2px;
-    right: 20px;
-    color: var(--blue);
-    font-size: 20px;
+  top: -2px;
+  right: 20px;
+  font-size: 20px;
+  color: var(--blue);
+  position: absolute;
 }
 
-main {
+#main {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 320px);
   justify-content: center;
+  grid-template-columns: repeat(auto-fit, 320px);
 }
 
 .movie {
-  margin: 1rem;
-  background: #373b69;
-  color: #eee;
-  border-radius: 2px;
-  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
   width: 300px;
-  letter-spacing: 1px;
+  margin: 1rem;
+  color: #eee;
   overflow: hidden;
+  letter-spacing: 1px;
+  border-radius: 8px;
+  background: var(--oxford-blue);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
 }
 
 .movie img {
   max-width: 100%;
+  border-radius: 8px 0 0;
 }
 
-.movie-info {
-  padding: 1rem;
+.primary-info {
+  padding: 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 }
 
-.movie-info span {
-  background: #22254b;
-  padding: 5px 8px;
+.primary-info h3 {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.secondary-info {
+  display: flex;
   font-size: 0.9rem;
+  justify-content: space-between;
+}
+
+.secondary-info span {
   font-weight: bold;
 }
 
-.movie-info span.green {
+.secondary-info span.green {
   color: #76d152;
 }
 
-.movie-info span.orange {
+.secondary-info span.orange {
   color: #f2a955;
 }
 
-.movie-info span.red {
+.secondary-info span.red {
   color: #e93f3f;
 }
