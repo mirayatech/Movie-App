@@ -23,8 +23,15 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+main {
+    display: flex;
+display: grid;
+grid-template-columns: repeat(auto-fit, 320px);
+justify-content: center;
+}
+
 .movie {
-  margin: 2rem;
+  margin: 1rem;
   background: #373b69;
   color: #eee;
   border-radius: 3px;
