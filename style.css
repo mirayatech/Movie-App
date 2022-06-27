@@ -38,6 +38,7 @@ justify-content: center;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
   width: 300px;
   letter-spacing: 1px;
+  overflow: hidden;
 }
 
 .movie img {
@@ -60,12 +61,12 @@ justify-content: center;
 
 
 .movie-info span.green {
-    color: #2CC56D;
+    color: #76d152;
 
   }
   
   .movie-info span.orange {
-      color: #E98B22;
+      color: #f2a955;
 }
 
 .movie-info span.red {
