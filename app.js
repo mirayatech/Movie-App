@@ -29,12 +29,22 @@ async function getMovies(url) {
     showMovies(respData.results);
 }
 
+
+const convertTime = (time) => {
+    return new Date(time).toLocaleDateString("en-us", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+  
+
 function showMovies(movies) {
     // clear main
     main.innerHTML = "";
 
     movies.forEach((movie) => {
-        const { poster_path, title, vote_average, overview } = movie;
+        const { poster_path, title, vote_average,release_date, overview } = movie;
 
         const movieEl = document.createElement("div");
         movieEl.classList.add("movie");
@@ -44,11 +54,14 @@ function showMovies(movies) {
                 src="${IMGPATH + poster_path}"
                 alt="${title}"
             />
-            <div class="movie-info">
+            <div class="primary-info">
                 <h3>${title}</h3>
+                <div class ="secondary-info">
+                <p class"date">${convertTime(release_date)}</p>
                 <span class="${getClassByRate(
                     vote_average
                 )}">${vote_average}</span>
+            </div>
             </div>
         `;
 
