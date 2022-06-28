@@ -1,10 +1,12 @@
 // key: cc711dbd2e5433016dae5bfb30562cde
 // https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=cc711dbd2e5433016dae5bfb30562cde&page=1
 
-{/* <div class="overview">
+{
+  /* <div class="overview">
 <h3>Overview:</h3>
 ${overview}
-</div> */}
+</div> */
+}
 
 const APIURL =
   " https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=cc711dbd2e5433016dae5bfb30562cde&page=1";
@@ -21,35 +23,33 @@ const search = document.getElementById("search");
 getMovies(APIURL);
 
 async function getMovies(url) {
-    const resp = await fetch(url);
-    const respData = await resp.json();
+  const resp = await fetch(url);
+  const respData = await resp.json();
 
-    console.log(respData);
+  console.log(respData);
 
-    showMovies(respData.results);
+  showMovies(respData.results);
 }
 
-
 const convertTime = (time) => {
-    return new Date(time).toLocaleDateString("en-us", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-  
+  return new Date(time).toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
 
 function showMovies(movies) {
-    // clear main
-    main.innerHTML = "";
+  // clear main
+  main.innerHTML = "";
 
-    movies.forEach((movie) => {
-        const { poster_path, title, vote_average,release_date, overview } = movie;
+  movies.forEach((movie) => {
+    const { poster_path, title, vote_average, release_date, overview } = movie;
 
-        const movieEl = document.createElement("div");
-        movieEl.classList.add("movie");
+    const movieEl = document.createElement("div");
+    movieEl.classList.add("movie");
 
-        movieEl.innerHTML = `
+    movieEl.innerHTML = `
             <img
                 src="${IMGPATH + poster_path}"
                 alt="${title}"
@@ -59,34 +59,36 @@ function showMovies(movies) {
                 <div class ="secondary-info">
                 <p class"date">${convertTime(release_date)}</p>
                 <span class="${getClassByRate(
-                    vote_average
+                  vote_average
                 )}">${vote_average}</span>
             </div>
             </div>
         `;
 
-        main.appendChild(movieEl);
-    });
+    main.appendChild(movieEl);
+  });
 }
 
 function getClassByRate(vote) {
-    if (vote >= 8) {
-        return "green";
-    } else if (vote >= 5) {
-        return "orange";
-    } else {
-        return "red";
-    }
+  if (vote >= 8) {
+    return "green";
+  } else if (vote >= 5) {
+    return "orange";
+  } else {
+    return "red";
+  }
 }
 
 form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const searchTerm = search.value;
+  const searchTerm = search.value;
 
-    if (searchTerm) {
-        getMovies(SEARCHAPI + searchTerm);
+  if (searchTerm) {
+    getMovies(SEARCHAPI + searchTerm);
 
-        search.value = "";
-    }
+    
+
+    search.value = "";
+  }
 });
