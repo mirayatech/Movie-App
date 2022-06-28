@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -27,27 +28,71 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+/* header */ 
 header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--navy-blue);
+  transition: background-color 0.5s ease;
+} 
+
+nav {
+  width: 100%;
   margin: auto;
   display: flex;
-  padding: 1.5rem;
+  max-width: 1300px;
+  padding: 30px 30px;
+  align-items: center;
   justify-content: space-between;
-}
+} 
+
 
 .logo {
   color: #fff;
   cursor: pointer;
+  font-weight: 600;
+  font-size: calc(35 / 16 * 1rem);
 }
 
 .label {
   position: relative;
 }
 
+ul {
+  display: flex;
+  list-style: none;
+  font-size: calc(18 / 16 * 1rem);
+}
+
+.nav-item.active {
+  color: var(--blue);
+}
+
+ul li {
+  cursor: pointer;
+  color: var(--white);
+  transition: all .3s ease;
+}
+
+ul li:hover {
+color: var(--blue);
+}
+
+
+ul li:first-child {
+  margin-right: 50px;
+  color: var(--white);
+}
+
+
+
 .search {
   border: none;
   outline: none;
   font-size: 1rem;
-  padding: 12px 20px;
+  padding: 15px 20px;
   color: var(--white);
   border-radius: 30px;
   background: var(--oxford-blue);
@@ -63,14 +108,118 @@ header {
 }
 
 .search-icon {
-  top: -2px;
+  top: 0;
   right: 20px;
   font-size: 20px;
   color: var(--blue);
   position: absolute;
 }
 
+/* container */
+.container.show {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  padding: 20px;
+  max-width: 1250px;
+  border-radius: 10px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+  background: var(--oxford-blue-light);
+}
+
+.container {
+  display: none;
+}
+
+.container img {
+  width: 210px;
+  margin-right: 40px;
+  border-radius: 8px;
+}
+
+.container .info .light-text {
+  font-weight: 400;
+  color: #ffffffc7;
+}
+
+.container .info h1 {
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 15px;
+  font-size: calc(30 / 16 * 1rem);
+}
+
+.container .info .first-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.container .info .first-info span {
+  border-radius: 5px;
+  padding: 8px 10px;
+  font-weight: 500;
+  font-size: .9rem;
+  color: var(--white);
+  background: var(--navy-blue);
+}
+
+.container .info .first-info span.green {
+  color: #76d152;
+}
+
+.container .info .first-info span.orange {
+  color: #f2a955;
+}
+
+.container .info .first-info span.red {
+  color: #e93f3f;
+}
+
+.container .info i {
+  padding: 15px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  border-radius: 50%;
+  color: var(--off-white);
+  background: var(--navy-blue);
+  transition: all .2s ease;
+}
+
+.container .info i:hover {
+color: var(--white);
+}
+
+
+.container .info .fa-bookmark {
+  padding: 15px 17px;
+}
+
+.container .info .fa-heart {
+  margin: 0 30px;
+}
+
+.container .info .second-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.container .info .second-info h3 {
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: var(--white);
+  font-size: calc(20 / 16 * 1rem);
+}
+
+.container .info .second-info p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--off-white);
+}
+
+/* Main */
 #main {
+  /* margin-top: 30px; */
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 320px);
@@ -81,26 +230,41 @@ header {
   margin: 1rem;
   color: #eee;
   overflow: hidden;
-  letter-spacing: 1px;
   border-radius: 8px;
+  letter-spacing: 1px;
   background: var(--oxford-blue);
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
 }
 
 .movie img {
+  cursor: pointer;
   max-width: 100%;
   border-radius: 8px 0 0;
 }
 
+.movie img:hover {
+  opacity: 0.8;
+  transition: all .2s ease;
+
+}
+
 .primary-info {
-  padding: 20px;
   display: flex;
   flex-direction: column;
+  padding: 0 10px 10px 10px;
 }
 
 .primary-info h3 {
-  margin-bottom: 15px;
+  cursor: pointer;
   font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  transition: all .2s ease;
+
+}
+
+.primary-info h3:hover {
+  color: var(--blue);
 }
 
 .secondary-info {
@@ -110,7 +274,7 @@ header {
 }
 
 .secondary-info span {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .secondary-info span.green {
