@@ -1,13 +1,4 @@
-// key: cc711dbd2e5433016dae5bfb30562cde
-// https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=cc711dbd2e5433016dae5bfb30562cde&page=1
-
-{
-  /* <div class="overview">
-<h3>Overview:</h3>
-${overview}
-</div> */
-}
-
+// URLS
 const APIURL =
   " https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=cc711dbd2e5433016dae5bfb30562cde&page=1";
 
@@ -15,14 +6,17 @@ const IMGPATH = "https://image.tmdb.org/t/p/w1280";
 const SEARCHAPI =
   " https://api.themoviedb.org/3/search/movie?&api_key=cc711dbd2e5433016dae5bfb30562cde&query=";
 
+// SELECTORS
 const form = document.querySelector("form");
 const main = document.querySelector("main");
 const search = document.getElementById("search");
-const container = document.querySelector('.container')
+const container = document.querySelector(".container");
+const navLinks = document.querySelectorAll('.nav-item')
 
 // initially get fav movies
 getMovies(APIURL);
 
+// fetching Movies
 async function getMovies(url) {
   const resp = await fetch(url);
   const respData = await resp.json();
@@ -32,6 +26,9 @@ async function getMovies(url) {
   showMovies(respData.results);
 }
 
+
+
+// Convert time
 const convertTime = (time) => {
   return new Date(time).toLocaleDateString("en-us", {
     year: "numeric",
@@ -40,16 +37,19 @@ const convertTime = (time) => {
   });
 };
 
+// convert only year
 const convertYearOnly = (time) => {
   return new Date(time).toLocaleDateString("en-us", {
-    year: "numeric"
+    year: "numeric",
   });
 };
 
+
+// show movies
 function showMovies(movies) {
-  // clear main
   main.innerHTML = "";
 
+  // create movie Layout
   movies.forEach((movie) => {
     const { poster_path, title, vote_average, release_date, overview } = movie;
 
@@ -62,40 +62,44 @@ function showMovies(movies) {
                 <h3>${title}</h3>
                 <div class ="secondary-info">
                 <p class"date">${convertTime(release_date)}</p>
-                <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+                <span class="${getClassByRate(
+      vote_average
+    )}">${vote_average}</span>
             </div>
             </div>
         `;
-
     main.appendChild(movieEl);
 
-    movieEl.addEventListener('click', () => {
-      container.classList.add('show')
+    // show container layout, if we click on movie
+    movieEl.addEventListener("click", () => {
+      container.classList.add("show");
 
       container.innerHTML = `
                         <img src="${IMGPATH + poster_path}" alt="${title}"/>
                             <div class="info">
-                              <h1>${title} <span class="light-text">(${convertYearOnly(release_date)})</span></h1>
+                              <h1>${title} <span class="light-text">(${convertYearOnly(
+        release_date
+      )})</span></h1>
 
 
                             <div class="first-info">
-                                <span class="${getClassByRate(vote_average)}">${vote_average}</span>
-                                <i class="fa-solid fa-heart"></i>
-                                <i class="fa-solid fa-bookmark"></i>
+                                <span class="${getClassByRate(
+        vote_average
+      )}">${vote_average}</span>
+                                <i onClick"updateStatus(this)" class="fa-solid fa-heart"></i>
+                                <i  onClick"updateStatus(this)" class="fa-solid fa-bookmark"></i>
                             </div>
                             <div class="second-info">
                                 <h3>Overview</h3>
                                 <p>${overview}</p>
                               </div>
 
-                            </div>`
-    })
-
+                            </div>`;
+    });
   });
 }
 
-
-
+// change color of rating count
 function getClassByRate(vote) {
   if (vote >= 8) {
     return "green";
@@ -106,7 +110,7 @@ function getClassByRate(vote) {
   }
 }
 
-
+// search for MOvie
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -117,7 +121,13 @@ form.addEventListener("submit", (e) => {
 
     search.value = "";
 
-    container.classList.remove('show')
-
+    container.classList.remove("show");
   }
 });
+
+navLinks.forEach((link) => {
+  link.addEventListener('click', () => {
+    document.querySelector('.nav-item.active').classList.remove('active')
+    link.classList.add('active')
+  })
+})
