@@ -51,7 +51,7 @@ function showMovies(movies) {
   main.innerHTML = "";
 
   movies.forEach((movie) => {
-    const { poster_path, title, vote_average, release_date, overview} = movie;
+    const { poster_path, title, vote_average, release_date, overview } = movie;
 
     const movieEl = document.createElement("div");
     movieEl.classList.add("movie");
