@@ -40,7 +40,7 @@ function showMovies(movies) {
 
   // create movie Layout
   movies.forEach((movie) => {
-    const { poster_path, title, vote_average, release_date, overview } = movie;
+    const { poster_path, title, vote_average, release_date, overview, backdrop_path } = movie;
 
     const movieEl = document.createElement("div");
     movieEl.classList.add("movie");
@@ -62,6 +62,9 @@ function showMovies(movies) {
     movieEl.addEventListener("click", () => {
       container.classList.add("show");
 
+      container.style.backgroundImage = `linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url( ${IMGPATH + backdrop_path} )`;
+      
+
       container.innerHTML = `
                               <i onclick="addToFavorite(this)" class="fa-solid fa-star"></i>
                               <img src="${IMGPATH + poster_path}" alt="${title}"/>
@@ -79,6 +82,8 @@ function showMovies(movies) {
                           <p class"date"><span class="thick-text">Release date:</span> ${convertTime(release_date)}</p>
                           </div>
                               </div>`;
+
+
     });
 
   });
@@ -132,4 +137,5 @@ function addToFavorite(e) {
   // let movieInfo { }
   // movies.push(movieInfo)
   // localStorage.setItem('movies', JSON.stringify(movieInfo));
-}
+}                            
+

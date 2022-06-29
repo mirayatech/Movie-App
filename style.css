@@ -225,7 +225,8 @@ ul li:first-child {
   position: relative;
   border-radius: 10px;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-  background: var(--oxford-blue-light);
+  /* background: var(--oxford-blue-light); */
+
 }
 
 .container {
