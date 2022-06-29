@@ -28,7 +28,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-/* header */ 
+/* header */
 header {
   top: 0;
   left: 0;
@@ -36,7 +36,7 @@ header {
   z-index: 1000;
   background: var(--navy-blue);
   transition: background-color 0.5s ease;
-} 
+}
 
 nav {
   width: 100%;
@@ -46,8 +46,7 @@ nav {
   padding: 30px 30px;
   align-items: center;
   justify-content: space-between;
-} 
-
+}
 
 .logo {
   color: #fff;
@@ -73,20 +72,17 @@ ul {
 ul li {
   cursor: pointer;
   color: var(--white);
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 ul li:hover {
-color: var(--blue);
+  color: var(--blue);
 }
-
 
 ul li:first-child {
   margin-right: 50px;
   color: var(--white);
 }
-
-
 
 .search {
   border: none;
@@ -159,7 +155,7 @@ ul li:first-child {
   border-radius: 5px;
   padding: 8px 10px;
   font-weight: 500;
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: var(--white);
   background: var(--navy-blue);
 }
@@ -182,20 +178,16 @@ ul li:first-child {
   font-size: 0.8rem;
   border-radius: 50%;
   color: var(--off-white);
+  pointer-events: all;
   background: var(--navy-blue);
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 }
 
 .container .info i:hover {
-color: var(--white);
+  color: var(--white);
 }
 
-
-.container .info .fa-bookmark {
-  padding: 15px 17px;
-}
-
-.container .info .fa-heart {
+.container .info .fa-star {
   margin: 0 30px;
 }
 
@@ -220,11 +212,26 @@ color: var(--white);
 /* Main */
 #main {
   /* margin-top: 30px; */
+  position: relative;
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 320px);
 }
 
+#main .fa-star {
+  cursor: pointer;
+  z-index: 200;
+  background: var(--blue);
+  padding: 10px;
+  border-radius: 8px 0 10px 0;
+  color: var(--off-white);
+  position: absolute;
+}
+
+#main .fa-star:hover {
+  color: var(--white);
+  transition: all 0.2s ease;
+}
 .movie {
   width: 300px;
   margin: 1rem;
@@ -242,11 +249,10 @@ color: var(--white);
   border-radius: 8px 0 0;
 }
 
-.movie img:hover {
+/* .movie img:hover {
   opacity: 0.8;
-  transition: all .2s ease;
-
-}
+  transition: all 0.2s ease;
+} */
 
 .primary-info {
   display: flex;
@@ -259,8 +265,7 @@ color: var(--white);
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 5px;
-  transition: all .2s ease;
-
+  transition: all 0.2s ease;
 }
 
 .primary-info h3:hover {
@@ -274,7 +279,7 @@ color: var(--white);
 }
 
 .secondary-info span {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .secondary-info span.green {
