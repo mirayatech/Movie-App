@@ -1,3 +1,5 @@
+// API-KEY: cc711dbd2e5433016dae5bfb30562cde
+
 // URLS
 const APIURL =
   " https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=cc711dbd2e5433016dae5bfb30562cde&page=1";
@@ -12,7 +14,11 @@ const main = document.querySelector("main");
 const search = document.getElementById("search");
 const container = document.querySelector(".container");
 const navLinks = document.querySelectorAll('.nav-item')
+const tagsEl = document.getElementById('genres')
 
+// const movies = JSON.parse(localStorage.getItem('movies') || '[]')
+
+// Genres
 
 
 // initially get fav movies
@@ -27,8 +33,6 @@ async function getMovies(url) {
 
   showMovies(respData.results);
 }
-
-
 
 // show movies
 function showMovies(movies) {
@@ -54,41 +58,46 @@ function showMovies(movies) {
               `;
     main.appendChild(movieEl);
 
-
-
-
     // show container layout, if we click on movie
     movieEl.addEventListener("click", () => {
       container.classList.add("show");
 
       container.innerHTML = `
-                                  <img src="${IMGPATH + poster_path}" alt="${title}"/>
-                                      <div class="info">
-                                        <h1>${title} <span class="light-text">(${convertYearOnly(release_date)})</span></h1>
-                                      <div class="first-info">
-                                          <span class="${getClassByRate(vote_average)}">${vote_average}</span>
-                                          <i onclick="addToFavorite(this)" class="fa-solid fa-star"></i>
-                                      </div>
-                                      <div class="second-info">
-                                          <h3>Overview</h3>
-                                          <p>${overview}</p>
-                                        </div>
-
-                                      </div>`;
+                              <i onclick="addToFavorite(this)" class="fa-solid fa-star"></i>
+                              <img src="${IMGPATH + poster_path}" alt="${title}"/>
+                              <div class="wrapper">
+                                  <h1>${title} <span class="light-text">(${convertYear(release_date)})</span></h1>
+                                  <div class ="rate">
+                                  <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+                                  
+                              </div>
+                             <div class ="overview">
+                             <h3>Overview</h3>
+                             <p>${overview}</p>
+                          </div>
+                          <div class="date">
+                          <p class"date"><span class="thick-text">Release date:</span> ${convertTime(release_date)}</p>
+                          </div>
+                              </div>`;
     });
-
-
 
   });
 }
 
+const convertYear = (time) => {
+  return new Date(time).toLocaleDateString("en-us", {
+    year: "numeric",
+  });
+};
 
-navLinks.forEach((link) => {
-  link.addEventListener('click', () => {
-    document.querySelector('.nav-item.active').classList.remove('active')
-    link.classList.add('active')
-  })
-})
+const convertTime = (time) => {
+  return new Date(time).toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
 
 // search for MOvie
 form.addEventListener("submit", (e) => {
@@ -104,7 +113,6 @@ form.addEventListener("submit", (e) => {
 });
 
 
-
 // change color of rating count
 function getClassByRate(vote) {
   if (vote >= 8) {
@@ -115,24 +123,13 @@ function getClassByRate(vote) {
     return "red";
   }
 }
-// Convert time
-const convertTime = (time) => {
-  return new Date(time).toLocaleDateString("en-us", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-};
-
-// convert only year
-const convertYearOnly = (time) => {
-  return new Date(time).toLocaleDateString("en-us", {
-    year: "numeric",
-  });
-};
 
 
-// function addToFavorite(e) {
-//   console.log(e.parentElement)
-// }
+function addToFavorite(e) {
+  let movie = e.parentNode;
+  console.log(movie)
 
+  // let movieInfo { }
+  // movies.push(movieInfo)
+  // localStorage.setItem('movies', JSON.stringify(movieInfo));
+}
