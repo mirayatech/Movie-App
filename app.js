@@ -1,24 +1,24 @@
 // API-KEY: cc711dbd2e5433016dae5bfb30562cde
 
 // URLS
-const APIURL =
-  " https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=cc711dbd2e5433016dae5bfb30562cde&page=1";
-
+const APIURL = " https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=cc711dbd2e5433016dae5bfb30562cde&page=1";
+const SEARCHAPI = " https://api.themoviedb.org/3/search/movie?api_key=cc711dbd2e5433016dae5bfb30562cde&query=";
 const IMGPATH = "https://image.tmdb.org/t/p/w1280";
-const SEARCHAPI =
-  " https://api.themoviedb.org/3/search/movie?&api_key=cc711dbd2e5433016dae5bfb30562cde&query=";
+
+const MOVIE_ID_URL = "https://api.themoviedb.org/3/movie/{movie_id}?api_key=cc711dbd2e5433016dae5bfb30562cde"
+
+// ---------------------------------------------------------------------------
+
 
 // SELECTORS
 const form = document.querySelector("form");
 const main = document.querySelector("main");
 const search = document.getElementById("search");
 const container = document.querySelector(".container");
-const navLinks = document.querySelectorAll('.nav-item')
-const tagsEl = document.getElementById('genres')
+const navLinks = document.querySelectorAll(".nav-item");
+const tagsEl = document.getElementById("genres");
 
-// const movies = JSON.parse(localStorage.getItem('movies') || '[]')
-
-// Genres
+// ---------------------------------------------------------------------------
 
 
 // initially get fav movies
@@ -28,22 +28,34 @@ getMovies(APIURL);
 async function getMovies(url) {
   const resp = await fetch(url);
   const respData = await resp.json();
-
-  console.log(respData);
-
   showMovies(respData.results);
+  // console.log(respData);
 }
 
-// show movies
+
+// ---------------------------------------------------------------------------
+
+
+// DIsplay the movies on the page
 function showMovies(movies) {
   main.innerHTML = "";
 
   // create movie Layout
   movies.forEach((movie) => {
-    const { poster_path, title, vote_average, release_date, overview, backdrop_path } = movie;
+    const {
+      poster_path,
+      title,
+      vote_average,
+      release_date,
+      overview,
+      backdrop_path,
+      id
+    } = movie;
 
     const movieEl = document.createElement("div");
     movieEl.classList.add("movie");
+
+    movieEl.setAttribute("data-id", `${id}`);
 
     movieEl.innerHTML = `
                   <i onclick="addToFavorite(this)" class="fa-solid fa-star"></i>
@@ -52,7 +64,9 @@ function showMovies(movies) {
                       <h3>${title}</h3>
                       <div class ="secondary-info">
                       <p class"date">${convertTime(release_date)}</p>
-                      <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+                      <span class="${getClassByRate(
+      vote_average
+    )}">${vote_average}</span>
                   </div>
                   </div>
               `;
@@ -62,16 +76,20 @@ function showMovies(movies) {
     movieEl.addEventListener("click", () => {
       container.classList.add("show");
 
-      container.style.backgroundImage = `linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url( ${IMGPATH + backdrop_path} )`;
-      
+      container.style.backgroundImage = `linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url( ${IMGPATH + backdrop_path
+        } )`;
 
       container.innerHTML = `
-                              <i onclick="addToFavorite(this)" class="fa-solid fa-star"></i>
-                              <img src="${IMGPATH + poster_path}" alt="${title}"/>
+                              <img src="${IMGPATH + poster_path
+        }" alt="${title}"/>
                               <div class="wrapper">
-                                  <h1>${title} <span class="light-text">(${convertYear(release_date)})</span></h1>
+                                  <h1>${title} <span class="light-text">(${convertOnlyYear(
+          release_date
+        )})</span></h1>
                                   <div class ="rate">
-                                  <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+                                  <span class="${getClassByRate(
+          vote_average
+        )}">${vote_average}</span>
                                   
                               </div>
                              <div class ="overview">
@@ -79,17 +97,19 @@ function showMovies(movies) {
                              <p>${overview}</p>
                           </div>
                           <div class="date">
-                          <p class"date"><span class="thick-text">Release date:</span> ${convertTime(release_date)}</p>
+                          <p class"date"><span class="thick-text">Release date:</span> ${convertTime(
+          release_date
+        )}</p>
                           </div>
                               </div>`;
-
-
     });
-
   });
 }
 
-const convertYear = (time) => {
+// ---------------------------------------------------------------------------
+
+
+const convertOnlyYear = (time) => {
   return new Date(time).toLocaleDateString("en-us", {
     year: "numeric",
   });
@@ -102,6 +122,8 @@ const convertTime = (time) => {
     day: "numeric",
   });
 };
+
+// ---------------------------------------------------------------------------
 
 
 // search for MOvie
@@ -117,6 +139,8 @@ form.addEventListener("submit", (e) => {
   }
 });
 
+// ---------------------------------------------------------------------------
+
 
 // change color of rating count
 function getClassByRate(vote) {
@@ -129,13 +153,53 @@ function getClassByRate(vote) {
   }
 }
 
+// ---------------------------------------------------------------------------
 
+
+// when click on star, it adds to favorite movies
 function addToFavorite(e) {
-  let movie = e.parentNode;
-  console.log(movie)
+  const movie = e.parentNode;
+  const id = movie.dataset.id;
+  const movieIds = JSON.parse(localStorage.getItem("movieIds")) || [];
+  movieIds.push(id);
+  localStorage.setItem("movieIds", JSON.stringify(movieIds));
+  console.log(movieIds);
+}
 
-  // let movieInfo { }
-  // movies.push(movieInfo)
-  // localStorage.setItem('movies', JSON.stringify(movieInfo));
-}                            
+// ---------------------------------------------------------------------------
 
+
+// get all favorite movies using movie ids
+async function getMoviesViaIds(movieIds) {
+  const movieIdsCopy = [...movieIds];
+
+  const movies = [];
+
+  movieIdsCopy.forEach((movieId) => {
+    // fetch a movie
+    fetch()
+
+
+    // create a movie object with properties i only need
+    const {
+      poster_path,
+      title,
+      vote_average,
+      release_date,
+      id
+    } = favoriteMovies;
+
+    // push into movies
+  });
+
+  return movies;
+}
+
+
+// ---------------------------------------------------------------------------
+
+async function getAndDisplayFavoriteMovies() {
+  // get movie ids from localstorage
+  // get movies
+  // loop over movies, and append each movie as a list item to the list
+}
