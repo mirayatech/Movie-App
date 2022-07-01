@@ -12,8 +12,6 @@ const form = document.querySelector("form");
 const main = document.querySelector("main");
 const search = document.getElementById("search");
 const container = document.querySelector(".container");
-const navLinks = document.querySelectorAll(".nav-item");
-const tagsEl = document.getElementById("genres");
 
 
 getMovies(APIURL);
@@ -180,3 +178,5 @@ function getClassByRate(vote) {
 //   // get movies
 //   // loop over movies, and append each movie as a list item to the list
 // }
+
+
