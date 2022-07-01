@@ -1,16 +1,13 @@
 // API-KEY: cc711dbd2e5433016dae5bfb30562cde
 
 // URLS
-const APIURL = " https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=cc711dbd2e5433016dae5bfb30562cde&page=1";
-const SEARCHAPI = " https://api.themoviedb.org/3/search/movie?api_key=cc711dbd2e5433016dae5bfb30562cde&query=";
+const APIURL =
+  " https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=cc711dbd2e5433016dae5bfb30562cde&page=1";
+const SEARCHAPI =
+  " https://api.themoviedb.org/3/search/movie?api_key=cc711dbd2e5433016dae5bfb30562cde&query=";
 const IMGPATH = "https://image.tmdb.org/t/p/w1280";
 
-const MOVIE_ID_URL = "https://api.themoviedb.org/3/movie/{movie_id}?api_key=cc711dbd2e5433016dae5bfb30562cde"
 
-// ---------------------------------------------------------------------------
-
-
-// SELECTORS
 const form = document.querySelector("form");
 const main = document.querySelector("main");
 const search = document.getElementById("search");
@@ -18,13 +15,10 @@ const container = document.querySelector(".container");
 const navLinks = document.querySelectorAll(".nav-item");
 const tagsEl = document.getElementById("genres");
 
-// ---------------------------------------------------------------------------
 
-
-// initially get fav movies
 getMovies(APIURL);
 
-// fetching Movies
+
 async function getMovies(url) {
   const resp = await fetch(url);
   const respData = await resp.json();
@@ -33,14 +27,9 @@ async function getMovies(url) {
 }
 
 
-// ---------------------------------------------------------------------------
-
-
-// DIsplay the movies on the page
 function showMovies(movies) {
   main.innerHTML = "";
 
-  // create movie Layout
   movies.forEach((movie) => {
     const {
       poster_path,
@@ -49,7 +38,7 @@ function showMovies(movies) {
       release_date,
       overview,
       backdrop_path,
-      id
+      id,
     } = movie;
 
     const movieEl = document.createElement("div");
@@ -58,7 +47,6 @@ function showMovies(movies) {
     movieEl.setAttribute("data-id", `${id}`);
 
     movieEl.innerHTML = `
-                  <i onclick="addToFavorite(this)" class="fa-solid fa-star"></i>
                   <img src="${IMGPATH + poster_path}" alt="${title}"/>
                   <div class="primary-info">
                       <h3>${title}</h3>
@@ -72,7 +60,7 @@ function showMovies(movies) {
               `;
     main.appendChild(movieEl);
 
-    // show container layout, if we click on movie
+
     movieEl.addEventListener("click", () => {
       container.classList.add("show");
 
@@ -106,8 +94,6 @@ function showMovies(movies) {
   });
 }
 
-// ---------------------------------------------------------------------------
-
 
 const convertOnlyYear = (time) => {
   return new Date(time).toLocaleDateString("en-us", {
@@ -123,10 +109,7 @@ const convertTime = (time) => {
   });
 };
 
-// ---------------------------------------------------------------------------
 
-
-// search for MOvie
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -139,10 +122,7 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-// ---------------------------------------------------------------------------
 
-
-// change color of rating count
 function getClassByRate(vote) {
   if (vote >= 8) {
     return "green";
@@ -153,53 +133,50 @@ function getClassByRate(vote) {
   }
 }
 
-// ---------------------------------------------------------------------------
+// // ---------------------------------------------------------------------------
 
+// // when click on star, it adds to favorite movies
+// function addToFavorite(e) {
+//   const movie = e.parentNode;
+//   const id = movie.dataset.id;
+//   const movieIds = JSON.parse(localStorage.getItem("movieIds")) || [];
+//   movieIds.push(id);
+//   localStorage.setItem("movieIds", JSON.stringify(movieIds));
+//   console.log(movieIds);
+// }
 
-// when click on star, it adds to favorite movies
-function addToFavorite(e) {
-  const movie = e.parentNode;
-  const id = movie.dataset.id;
-  const movieIds = JSON.parse(localStorage.getItem("movieIds")) || [];
-  movieIds.push(id);
-  localStorage.setItem("movieIds", JSON.stringify(movieIds));
-  console.log(movieIds);
-}
+// // ---------------------------------------------------------------------------
 
-// ---------------------------------------------------------------------------
+// // get all favorite movies using movie ids
+// async function getMoviesViaIds(movieIds) {
+//   const movieIdsCopy = [...movieIds];
 
+//   const movies = [];
 
-// get all favorite movies using movie ids
-async function getMoviesViaIds(movieIds) {
-  const movieIdsCopy = [...movieIds];
+//   movieIdsCopy.forEach((movieId) => {
+//     const movieIds = movieID;
 
-  const movies = [];
+//     // fetch a movie
+//     // fetch(
+//     //   `https://api.themoviedb.org/3/movie/${movieId}/external_ids?api_key=cc711dbd2e5433016dae5bfb30562cde`
+//     // );
+//     // const response = await(url);
+//     // const responseData = await response.json();
 
-  movieIdsCopy.forEach((movieId) => {
-    // fetch a movie
-    fetch()
+//     // create a movie object with properties i only need
+//     const { poster_path, title, vote_average, release_date, id } =
+//       favoriteMovies;
 
+//     // push into movies
+//   });
 
-    // create a movie object with properties i only need
-    const {
-      poster_path,
-      title,
-      vote_average,
-      release_date,
-      id
-    } = favoriteMovies;
+//   return movies;
+// }
 
-    // push into movies
-  });
+// // ---------------------------------------------------------------------------
 
-  return movies;
-}
-
-
-// ---------------------------------------------------------------------------
-
-async function getAndDisplayFavoriteMovies() {
-  // get movie ids from localstorage
-  // get movies
-  // loop over movies, and append each movie as a list item to the list
-}
+// async function getAndDisplayFavoriteMovies() {
+//   // get movie ids from localstorage
+//   // get movies
+//   // loop over movies, and append each movie as a list item to the list
+// }
