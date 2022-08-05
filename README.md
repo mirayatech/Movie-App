@@ -14,7 +14,7 @@ You can search for movies and see what kind of rating it has, release date and i
 
 ## How it looks 👀
 
-<strong>Live Demo: </strong> https://navy-movieapp.netlify.app/ <br> <br> 
+<strong>Live Demo: </strong>  https://movieflix-navy.vercel.app/<br> <br> 
 
 
 
